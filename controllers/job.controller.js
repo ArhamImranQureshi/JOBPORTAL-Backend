@@ -2,9 +2,9 @@ import { Job } from "../models/job.model";
 
 export const postJob = (req,res)=>{
     try{
-        const {title,description,requirements,salary,location,jobType,exprerienceLevel,position,companyId}=req.body;
+        const {title,description,requirements,salary,location,jobType,experience,position,companyId}=req.body;
         const userId=req.id;
-        if(!title || !description || !requirements || !salary || !location || !jobType || !exprerienceLevel || !position || !companyId){
+        if(!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId){
             return res.status(400).json({
                 message:"All fields are required",
                 success:false,
@@ -13,11 +13,11 @@ export const postJob = (req,res)=>{
         const job = Job.create({
             title,
             description,
-            requirements,
-            salary,
+            requirements:requirements.split(","),
+            salary:Number(salary),
             location,
             jobType,
-            exprerienceLevel,
+            exprerienceLevel: experience,
             position,
             company:companyId,
             created_by:userId,
