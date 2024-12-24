@@ -95,7 +95,7 @@ export const logout = async(req,res)=>{
     }
 
 }
-
+/////////// Updating profile is not working
 export const updateProfile = async(req,res)=>{
     try{
         const {fullname, email, phoneNumber, bio, skills} = req.body;

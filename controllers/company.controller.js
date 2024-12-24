@@ -6,7 +6,7 @@ try{
     if(!companyName){
         return res.status(400).json({
             message:"Company name is required",
-            success:false,
+            success:false
         });
     }
     let company = await Company.findOne({name:companyName});
@@ -21,8 +21,8 @@ try{
         userId:req.id
     });
     return res.status(201).json({
-        message:"Company Register",
-        Company,
+        message:"Company Registered",
+        company,
         success:true
     })
     } catch(err){
@@ -40,6 +40,10 @@ export const getCompany = async(req,res)=>{
                 success:false,
             })
         }
+        return res.status(200).json({
+            companies,
+            success:true,
+        })
 
     }catch(err){
         console.log(err)
@@ -64,13 +68,16 @@ export const getCompanyById= async(req,res)=>{
     }
 }
 
+
+///////  COmpany Data is not Updating
+
 export const updateCompany= async(req,res)=>{
     try{
         const{name,description,website,location} = req.body;
         const file = req.file;
         
         const updateData = {name,description,website,location};
-
+        
         const company  = await Company.findByIdAndUpdate(req.params.id , updateData , {new:true});
         if(!company){
             return res.status(400).json({
@@ -80,6 +87,7 @@ export const updateCompany= async(req,res)=>{
         }
         return res.status(200).json({
             message:"Company info updated",
+            company,
             success:true,
         })
     } catch(err){

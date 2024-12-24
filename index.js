@@ -4,7 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './utils/db.js';
 import userRouter from './routes/user.route.js';
-import companyRouter from "./routes/company.route.js";
+import companyRoute from "./routes/company.route.js";
 dotenv.config({})
 
 const app = express();
@@ -20,6 +20,7 @@ app.use(cors(corsOptions));
 
 //////// apis
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/company",companyRoute)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
