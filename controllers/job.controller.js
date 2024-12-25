@@ -22,7 +22,36 @@ export const postJob = (req,res)=>{
             company:companyId,
             created_by:userId,
         })
+       return res.status(201).json({
+            message:"New Job Created",
+            job,
+            success:true
+        })
     } catch(err){
 
+    }
+}
+export const getAllJobs = async( req,res)=>{
+    try{
+        const keyword = req.query.keyword || "";
+        const query = {
+            $or:[
+                {title:{ $regex:keyword,$options:"i"}},
+                {description:{ $regex:keyword,$options:"i"}}          
+            ]
+        };
+        const jobs= await Job.find(query);
+        if(!jobs){
+            return res.status(404).json({
+                message:"Jobs not Found",
+                success:false
+            })
+        }
+        return res.status(200).json({
+            jobs,
+            success:true
+        })
+    }catch(err){
+        console.log(err)
     }
 }
