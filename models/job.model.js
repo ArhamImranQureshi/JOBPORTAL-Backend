@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const JobSchema =new mongoose.Schema({
+const jobSchema =new mongoose.Schema({
     title:{
         type:String,
         required:true,
@@ -9,12 +9,12 @@ const JobSchema =new mongoose.Schema({
         type:String,
         required:true,
     },
-    requirements:{
-        type:String,
+    requirements:[{
+        type: String,
         required:true,
-    },
+    }],
     experienceLevel:{
-        type:Number,
+        type:String,
         required:true,
     },
     salary:{
@@ -30,7 +30,7 @@ const JobSchema =new mongoose.Schema({
         required:true,
     },
     position:{
-        type:String,
+        type:Number,
         required:true,
     },
     company:{
@@ -48,4 +48,4 @@ const JobSchema =new mongoose.Schema({
         ref:'Application',
     }
 },{timestamps:true});
-export const Job = mongoose.model("Job", JobSchema)
+export const Job = mongoose.model("Job", jobSchema)
