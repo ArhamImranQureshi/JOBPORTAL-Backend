@@ -48,7 +48,6 @@ export const getAppliedJob = async (req, res) => {
     const application = await Application.find({ applicant: userId })
       .sort({ createdAt: -1 })
       .populate({
-        job: {
           path: "job",
           options: {
             sort: { createdAt: -1 },
@@ -59,7 +58,6 @@ export const getAppliedJob = async (req, res) => {
               sort: { createdAt: -1 },
             },
           },
-        },
       });
     if (!application) {
       return res.status(404).json({
