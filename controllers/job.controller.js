@@ -30,7 +30,7 @@ export const postJob = async (req, res) => {
         success: false,
       });
     }
-    const job =await Job.create({
+    const job = await Job.create({
       title,
       description,
       requirements: requirements.split(","),
